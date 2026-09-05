@@ -1,0 +1,15 @@
+export { CanvasContainerClassName } from "@constants/CanvasContainerClassName";
+export { type CanvasContainer } from "@contracts/CanvasContainer";
+export { type CanvasContainerRef } from "@contracts/CanvasContainerRef";
+export { type P5CanvasInstance } from "@contracts/P5CanvasInstance";
+export { type P5CanvasInstanceRef } from "@contracts/P5CanvasInstanceRef";
+export { type P5CanvasProps } from "@contracts/P5CanvasProps";
+export { p5 } from "@contracts/p5";
+export { type Sketch } from "@contracts/Sketch";
+export { type SketchProps } from "@contracts/SketchProps";
+export { type Updater } from "@contracts/Updater";
+export { createP5CanvasInstance } from "@utils/createP5CanvasInstance";
+export { logErrorBoundaryError } from "@utils/logErrorBoundaryError";
+export { propsAreEqual } from "@utils/propsAreEqual";
+export { removeP5CanvasInstance } from "@utils/removeP5CanvasInstance";
+export { updateP5CanvasInstance } from "@utils/updateP5CanvasInstance";

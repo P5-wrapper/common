@@ -1,0 +1,85 @@
+{
+  "name": "@p5-wrapper/common",
+  "description": "Common types and utilities for use across p5 wrapper libraries.",
+  "version": "0.1.0",
+  "type": "module",
+  "packageManager": "pnpm@12.3.4",
+  "engines": {
+    "node": ">=24.20.0"
+  },
+  "homepage": "https://github.com/P5-wrapper/common",
+  "license": "MIT",
+  "files": [
+    "README.md",
+    "dist/*"
+  ],
+  "types": "./dist/main.d.ts",
+  "main": "./dist/main.cjs",
+  "module": "./dist/main.mjs",
+  "exports": {
+    ".": {
+      "types": "./dist/main.d.ts",
+      "import": "./dist/main.mjs",
+      "require": "./dist/main.cjs"
+    }
+  },
+  "scripts": {
+    "build": "rimraf dist && pnpm build:library",
+    "build:library": "tsc --noEmit && vite build --config config/vite/vite.config.ts --mode lib",
+    "format": "pnpm prettier --write .",
+    "format:check": "pnpm prettier --check .",
+    "integrate": "pnpm format:check && pnpm lint && pnpm test && pnpm build",
+    "lint": "eslint --config config/eslint/eslint.config.ts",
+    "lint:fix": "pnpm lint --fix",
+    "prettier": "prettier --config config/prettier/prettier.json --ignore-path .gitignore --ignore-path config/prettier/.prettierignore",
+    "test": "vitest run --silent --config config/vite/vite.config.ts",
+    "test:coverage": "vitest run --silent --coverage --config config/vite/vite.config.ts",
+    "test:watch": "vitest watch --config config/vite/vite.config.ts"
+  },
+  "keywords": [
+    "p5",
+    "processing",
+    "typescript",
+    "shared",
+    "contracts"
+  ],
+  "author": {
+    "name": "James Robb",
+    "url": "https://github.com/jamesrweb",
+    "email": "47126579+jamesrweb@users.noreply.github.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/P5-wrapper/common.git"
+  },
+  "bugs": {
+    "url": "https://github.com/P5-wrapper/common/issues"
+  },
+  "dependencies": {
+    "microdiff": "^1.6.0"
+  },
+  "peerDependencies": {
+    "p5": ">= 2.0.0"
+  },
+  "devDependencies": {
+    "@eslint/compat": "^2.1.1",
+    "@eslint/config-helpers": "^0.7.0",
+    "@eslint/js": "^10.0.1",
+    "@microsoft/api-extractor": "^7.59.0",
+    "@trivago/prettier-plugin-sort-imports": "^6.0.2",
+    "@types/node": "^26.4.1",
+    "@vitest/coverage-v8": "^5.0.0",
+    "eslint": "^10.10.0",
+    "happy-dom": "^20.14.0",
+    "jiti": "^2.7.0",
+    "p5": "^2.3.2",
+    "prettier": "^3.9.6",
+    "rimraf": "^6.1.3",
+    "typescript": "6.0.3",
+    "typescript-eslint": "^8.69.0",
+    "vite": "^8.2.2",
+    "vite-plugin-dts": "^5.1.0",
+    "vitest": "^5.0.0",
+    "vitest-canvas-mock": "^1.1.5"
+  }
+}

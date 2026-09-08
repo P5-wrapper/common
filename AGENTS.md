@@ -85,6 +85,11 @@ set of contracts and lifecycle utilities. The rules that protect this:
   (`esbuild` only). Do not add `postinstall`-executing packages to the allowlist
   or widen these settings without explicit permission, new exclusions under
   `minimumReleaseAgeExclude` require explicit permission also
+- **p5 dev resolution pinned:** the devDependency `p5` is pinned to exactly
+  `2.3.2` because upstream `2.3.3` was published without its `types/` files
+  (despite the manifest declaring them), breaking type checking. The
+  `p5 >= 2.0.0` peer dependency contract is unchanged. Revisit when p5.js
+  republishes a complete 2.3.3+
 - **Runtime dependencies are a contract:** `microdiff` is the only runtime
   dependency and `p5` is the only peer dependency. The library code must never
   import anything else at runtime. Bundle size and dependency surface matter
@@ -120,10 +125,12 @@ set of contracts and lifecycle utilities. The rules that protect this:
 - **Import style:** Use `import { type Foo }` inline type imports, matching the
   existing code. Imports of contracts across the alias boundaries follow the
   sorted import order enforced by Prettier
-- **Type assertions:** Avoid `as` casts in library code. The one existing
-  `@ts-expect-error` in `createP5CanvasInstance.ts` documents a known p5
-  upstream type inference issue — do not remove it without verifying against the
-  referenced p5 PR
+- **Type assertions:** Avoid `as` casts in library code. The two existing
+  `@ts-expect-error` suppressions — in `src/utils/createP5CanvasInstance.ts` and
+  `tests/utils/removeP5CanvasInstance.test.ts` — document a known p5 upstream
+  type inference issue
+  ([p5.js#7863](https://github.com/processing/p5.js/pull/7863)); do not remove
+  them without verifying against the referenced p5 PR
 - **Version pinned to 6.0.3:** `typescript` is an exact pin
   (`"typescript": "6.0.3"`, no caret), deliberately held back from v7.
   typescript-eslint does not currently support TypeScript 7 — its

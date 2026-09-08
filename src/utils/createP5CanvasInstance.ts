@@ -8,7 +8,5 @@ export function createP5CanvasInstance<Props extends SketchProps>(
   sketch: Sketch<Props>,
   canvasContainer: CanvasContainer
 ): P5CanvasInstance<Props> {
-  // @see https://github.com/processing/p5.js/pull/7863
-  // @ts-expect-error The p5 library changes from the above PR caused some issues with the inferred types.
   return new p5(sketch, canvasContainer);
 }

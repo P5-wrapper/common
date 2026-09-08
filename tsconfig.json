@@ -16,6 +16,7 @@
     "isolatedModules": true,
     "useDefineForClassFields": true,
     "forceConsistentCasingInFileNames": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "noEmit": true
   }
 }

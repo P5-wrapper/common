@@ -5,6 +5,3 @@ minimumReleaseAgeStrict: true
 
 onlyBuiltDependencies:
   - esbuild
-
-minimumReleaseAgeExclude:
-  - happy-dom@20.14.0

@@ -144,7 +144,7 @@ Every change must pass before being considered complete:
 - `pnpm format:check` — formatting
 - `pnpm lint` — linting
 - `pnpm test` — testing
-- `pnpm build` — type checking (`tsc --noEmit`) plus the library build
+- `pnpm build` — type checking (`tsc`) plus the library build
 
 `pnpm integrate` runs format check → lint → test → build in one command and is
 the closest local mirror of CI.
@@ -380,10 +380,10 @@ Everything exported from `src/main.ts` is public API and semver-protected:
 
 ### Build Pipeline
 
-- `pnpm build` = clean `dist` → `tsc --noEmit` (type check) → library build
-  (ESM + CJS via Vite library mode, types bundled by `vite-plugin-dts` with
-  `bundleTypes`, which requires the `@microsoft/api-extractor` dev dependency —
-  without it installed, `vite-plugin-dts` silently skips type bundling)
+- `pnpm build` = clean `dist` → `tsc` (type check) → library build (ESM + CJS
+  via Vite library mode, types bundled by `vite-plugin-dts` with `bundleTypes`,
+  which requires the `@microsoft/api-extractor` dev dependency — without it
+  installed, `vite-plugin-dts` silently skips type bundling)
 - `package.json` `exports` maps `types` → `main.d.ts`, `import` → `main.mjs`,
   `require` → `main.cjs`. The `files` field only ships `README.md` and `dist/*`
 - The library entry filenames are pinned in `config/vite/library.ts` (`main.mjs`
@@ -421,8 +421,9 @@ Everything exported from `src/main.ts` is public API and semver-protected:
   `pnpm install --frozen-lockfile`
 - **CD** (`continuous-deployment.yml`): Runs on push to `main` and
   `workflow_dispatch`. One job: `npm` (builds, tests, and publishes the package
-  with provenance). CD concurrency does NOT cancel in-progress runs — never
-  interrupt an in-flight publish
+  with provenance, then creates the matching `vx.y.z` GitHub release with
+  auto-generated notes anchored at the previous version tag). CD concurrency
+  does NOT cancel in-progress runs — never interrupt an in-flight publish
 - **CodeQL** (`CODEQL.yml`): Security analysis on PRs and pushes to `main`
 - **Dependabot:** Monthly for npm (one grouped update across all dependencies)
   and GitHub Actions, each limited to a single open pull request. Semver-major

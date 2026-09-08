@@ -14,6 +14,8 @@ describe("removeP5CanvasInstance", () => {
       current: null
     };
 
+    // @see https://github.com/processing/p5.js/pull/7863
+    // @ts-expect-error The p5 library changes from the above PR caused some issues with the inferred types.
     p5CanvasInstanceRef.current = instance;
 
     removeP5CanvasInstance(p5CanvasInstanceRef);

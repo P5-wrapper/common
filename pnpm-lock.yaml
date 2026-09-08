@@ -144,8 +144,8 @@ importers:
         specifier: ^2.7.0
         version: 2.7.0
       p5:
-        specifier: ^2.3.3
-        version: 2.3.3
+        specifier: 2.3.2
+        version: 2.3.2
       prettier:
         specifier: ^3.9.6
         version: 3.9.6
@@ -1149,8 +1149,8 @@ packages:
     resolution: {integrity: sha512-LaNjtRWUBY++zB5nE/NwcaoMylSPk+S+ZHNB1TzdbMJMny6dynpAGt7X/tl/QYq3TIeE6nxHppbo2LGymrG5Pw==}
     engines: {node: '>=10'}
 
-  p5@2.3.3:
-    resolution: {integrity: sha512-+zVz5JFp3sCLpLscTMOLoA0UEHV0dsHxngKVfMmeW1J2/IXvfFqCjNYZeIOtG4Lhfnpm7cu6446P6Ho64ihXfA==}
+  p5@2.3.2:
+    resolution: {integrity: sha512-DlX4rVQb9R2Z16XtTTNN/1zf7FZWy55ApA6ZS0GNJBDraymJcd9kbxmpIDKYnVxiXrchgb2YckWsmm+TSEJVPg==}
 
   package-json-from-dist@1.0.1:
     resolution: {integrity: sha512-UEZIS3/by4OC8vL3P2dTXRETpebLI2NiI5vIrjaD/5UtrkFX/tNbwjTSRAGC/+7CAo2pIcBaRgWmcBBHcsaCIw==}
@@ -2461,7 +2461,7 @@ snapshots:
     dependencies:
       p-limit: 3.1.0
 
-  p5@2.3.3:
+  p5@2.3.2:
     dependencies:
       '@davepagurek/bezier-path': 0.0.7
       '@japont/unicode-range': 1.0.0

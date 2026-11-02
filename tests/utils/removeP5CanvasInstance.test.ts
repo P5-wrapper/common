@@ -11,7 +11,7 @@ describe("removeP5CanvasInstance", () => {
     });
     const removeSpy = vi.spyOn(instance, "remove");
     const p5CanvasInstanceRef: P5CanvasInstanceRef<SketchProps> = {
-      current: null,
+      current: null
     };
 
     // @see https://github.com/processing/p5.js/pull/7863
@@ -26,7 +26,7 @@ describe("removeP5CanvasInstance", () => {
 
   it("Handles a null ref without throwing", () => {
     const p5CanvasInstanceRef: P5CanvasInstanceRef<SketchProps> = {
-      current: null,
+      current: null
     };
 
     expect(() => removeP5CanvasInstance(p5CanvasInstanceRef)).not.toThrow();

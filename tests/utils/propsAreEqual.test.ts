@@ -16,12 +16,12 @@ describe("propsAreEqual", () => {
     const current: P5CanvasProps = {
       sketch: () => {
         return;
-      },
+      }
     };
     const next: P5CanvasProps = {
       sketch: () => {
         return;
-      },
+      }
     };
     const equal = propsAreEqual(current, next);
 

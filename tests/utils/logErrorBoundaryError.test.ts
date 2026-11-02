@@ -6,7 +6,7 @@ import {
   expect,
   it,
   MockInstance,
-  vi,
+  vi
 } from "vitest";
 
 describe("logErrorBoundaryError", () => {
@@ -28,7 +28,7 @@ describe("logErrorBoundaryError", () => {
 
     expect(errorLoggerSpy).toHaveBeenCalledOnce();
     expect(errorLoggerSpy).toHaveBeenCalledWith(
-      expect.stringContaining('Error("Example")'),
+      expect.stringContaining('Error("Example")')
     );
   });
 
@@ -37,7 +37,7 @@ describe("logErrorBoundaryError", () => {
 
     expect(errorLoggerSpy).toHaveBeenCalledOnce();
     expect(errorLoggerSpy).toHaveBeenCalledWith(
-      expect.stringContaining('String("Example")'),
+      expect.stringContaining('String("Example")')
     );
   });
 
@@ -46,7 +46,7 @@ describe("logErrorBoundaryError", () => {
 
     expect(errorLoggerSpy).toHaveBeenCalledOnce();
     expect(errorLoggerSpy).toHaveBeenCalledWith(
-      expect.stringContaining("Number(404)"),
+      expect.stringContaining("Number(404)")
     );
   });
 

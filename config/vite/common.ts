@@ -8,8 +8,8 @@ export function common(root: string): UserConfig {
         "@": resolve(root, "src"),
         "@utils": resolve(root, "src", "utils"),
         "@constants": resolve(root, "src", "constants"),
-        "@contracts": resolve(root, "src", "contracts"),
-      },
-    },
+        "@contracts": resolve(root, "src", "contracts")
+      }
+    }
   };
 }

@@ -76,7 +76,7 @@ set of contracts and lifecycle utilities. The rules that protect this:
 
 ### Package Management
 
-- **Package manager:** pnpm (`pnpm@12.3.4` via the `packageManager` field)
+- **Package manager:** pnpm (`pnpm@12.16.1` via the `packageManager` field)
 - **Node.js engine:** `>=24.20.0` (declared in `package.json` `engines`)
 - **Lock file:** `pnpm-lock.yaml` is committed. NEVER delete or regenerate it
   casually, run `pnpm install` after dependency changes

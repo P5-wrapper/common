@@ -10,6 +10,6 @@ const root = resolve(__dirname, "..", "..");
 export default defineConfig((): UserConfig => {
   return {
     ...common(root),
-    ...library(root)
+    ...library(root),
   } satisfies UserConfig;
 });

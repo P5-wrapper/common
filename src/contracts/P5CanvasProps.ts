@@ -4,7 +4,7 @@ import { type Updater } from "@contracts/Updater";
 
 export type P5CanvasProps<
   Props extends SketchProps = SketchProps,
-  OutputNode = unknown
+  OutputNode = unknown,
 > = {
   sketch?: Sketch<Props>;
   updater?: Updater<Props>;

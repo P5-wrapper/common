@@ -3,5 +3,5 @@ import { type SketchProps } from "@contracts/SketchProps";
 
 export type Updater<Props extends SketchProps = SketchProps> = (
   instance: P5CanvasInstance<Props>,
-  props: Props
+  props: Props,
 ) => void;

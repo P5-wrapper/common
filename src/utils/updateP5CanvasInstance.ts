@@ -8,7 +8,7 @@ import { removeP5CanvasInstance } from "@utils/removeP5CanvasInstance";
 export function updateP5CanvasInstance<Props extends SketchProps>(
   p5CanvasInstanceRef: P5CanvasInstanceRef<Props>,
   canvasContainerRef: CanvasContainerRef,
-  sketch: Sketch<Props>
+  sketch: Sketch<Props>,
 ) {
   if (canvasContainerRef.current === null) {
     return null;

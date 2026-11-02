@@ -97,15 +97,15 @@ set of contracts and lifecycle utilities. The rules that protect this:
 
 ### Formatting and Linting
 
-- **Prettier** is the formatter (this project does not use Biome — do not
-  introduce it). Config lives at `config/prettier/prettier.json`, key rules:
-  `printWidth: 80`, `arrowParens: "avoid"`, `trailingComma: "none"`,
-  `proseWrap: "always"` (all Markdown prose is hard-wrapped at 80 columns),
-  imports sorted by `@trivago/prettier-plugin-sort-imports`
-- **ESLint** is the linter. Config lives at `config/eslint/eslint.config.ts` and
-  extends `eslint` recommended plus `typescript-eslint` strict and stylistic
-  with project-aware TypeScript parsing. Type-aware linting runs via `jiti` —
-  keep the config a `.ts` file
+- **Biome** is the formatter and linter. Config lives at the repository-root
+  `biome.json`, key rules: 2-space indentation, double quotes, semicolons
+  always, `proseWrap: "always"` (all Markdown prose is hard-wrapped at 80
+  columns), imports organised by Biome's `assist` `organizeImports` action,
+  linter `recommended` preset plus `useBlockStatements: "error"`. The `$schema`
+  key points at `./node_modules/@biomejs/biome/configuration_schema.json` so it
+  always tracks the installed Biome version. `pnpm format` runs
+  `biome check --write .`; `pnpm lint` runs `biome check .` (formatting check
+  plus lint)
 - **No comments:** Do not add comments to source files. The code should be
   self-documenting. The only permitted exceptions are `@ts-expect-error` /
   `@ts-ignore` suppressions with a `@see` reference (see
@@ -124,23 +124,18 @@ set of contracts and lifecycle utilities. The rules that protect this:
   `config/vite/common.ts` — and MUST be kept in sync when changed
 - **Import style:** Use `import { type Foo }` inline type imports, matching the
   existing code. Imports of contracts across the alias boundaries follow the
-  sorted import order enforced by Prettier
+  organised import order enforced by Biome
 - **Type assertions:** Avoid `as` casts in library code. The two existing
   `@ts-expect-error` suppressions — in `src/utils/createP5CanvasInstance.ts` and
   `tests/utils/removeP5CanvasInstance.test.ts` — document a known p5 upstream
   type inference issue
   ([p5.js#7863](https://github.com/processing/p5.js/pull/7863)); do not remove
   them without verifying against the referenced p5 PR
-- **Version pinned to 6.0.3:** `typescript` is an exact pin
-  (`"typescript": "6.0.3"`, no caret), deliberately held back from v7.
-  typescript-eslint does not currently support TypeScript 7 — its
-  [supported range](https://typescript-eslint.io/packages/parser) is
-  `>=4.8.4 <6.1.0`, and the Go-based TypeScript 7 is not yet feature compatible
-  with the JavaScript-based v6 API that typescript-eslint builds on. Upstream
-  support is tracked in
-  [typescript-eslint#10940](https://github.com/typescript-eslint/typescript-eslint/issues/10940)
-  and cannot land before TypeScript 7.1.x at the earliest. Do not bump past
-  `6.0.x` or widen the pin without confirming upstream support. Do NOT run
+- **Version pinned to the latest 6.x.x:** `typescript` is an exact pin (no
+  caret), deliberately held back from v7. TypeScript 7 is Go-based and not yet
+  feature compatible with the JavaScript-based v6 API that the build toolchain
+  (`vite`, `vite-plugin-dts`, `@microsoft/api-extractor`) builds on. Do not bump
+  past `6.0.x` or widen the pin without confirming toolchain support. Do NOT run
   TypeScript 7 side by side with v6 as an interim measure — we wait for full
   feature parity before migrating, no half measures
 
@@ -148,13 +143,12 @@ set of contracts and lifecycle utilities. The rules that protect this:
 
 Every change must pass before being considered complete:
 
-- `pnpm format:check` — formatting
-- `pnpm lint` — linting
+- `pnpm lint` — formatting check + linting (Biome)
 - `pnpm test` — testing
 - `pnpm build` — type checking (`tsc`) plus the library build
 
-`pnpm integrate` runs format check → lint → test → build in one command and is
-the closest local mirror of CI.
+`pnpm integrate` runs lint → test → build in one command and is the closest
+local mirror of CI.
 
 ### Git Safety
 
@@ -272,7 +266,8 @@ legally certify a contribution — the human submitter reviews the AI-generated
 code, takes full responsibility for it, and adds any certification trailers
 themselves. Following the rules the Linux kernel team enforce for AI coding
 assistants, an agent's role in a commit ends at the message body — no
-`Signed-off-by`, no `Co-authored-by`, no other trailers or sign-offs. See [AI
+`Signed-off-by`, no `Co-authored-by`, no other trailers or sign-offs. See
+[AI
 Coding Assistants — The Linux Kernel documentation]
 (https://docs.kernel.org/process/coding-assistants.html), integrated into this
 ruleset on 2026-09-06.
@@ -372,9 +367,8 @@ Everything exported from `src/main.ts` is public API and semver-protected:
 │   ├── constants/
 │   ├── utils/
 │   └── setup.ts              # Test bootstrap (canvas mock)
+├── biome.json                # Biome formatter + linter config (repo root)
 ├── config/
-│   ├── eslint/eslint.config.ts
-│   ├── prettier/prettier.json
 │   └── vite/
 │       ├── vite.config.ts    # Composes common + library configs
 │       ├── common.ts         # Shared path aliases
@@ -407,16 +401,14 @@ Everything exported from `src/main.ts` is public API and semver-protected:
 | Command              | Action                                                     |
 | :------------------- | :--------------------------------------------------------- |
 | `pnpm install`       | Install dependencies (updates lockfile — commit the diff). |
-| `pnpm format`        | Format all files with Prettier.                            |
-| `pnpm format:check`  | Check formatting without writing.                          |
-| `pnpm lint`          | Run ESLint (type-aware).                                   |
-| `pnpm lint:fix`      | Run ESLint with autofix.                                   |
+| `pnpm format`        | Format and lint-fix all files with Biome.                  |
+| `pnpm lint`          | Check formatting and lint with Biome.                      |
 | `pnpm test`          | Run the Vitest suite.                                      |
 | `pnpm test:coverage` | Run tests with coverage (what CI runs).                    |
 | `pnpm test:watch`    | Watch mode.                                                |
 | `pnpm build:library` | Type check + build the npm library.                        |
 | `pnpm build`         | Clean and build the library.                               |
-| `pnpm integrate`     | format:check → lint → test → build (CI mirror).            |
+| `pnpm integrate`     | lint → test → build (CI mirror).                           |
 
 ## CI/CD
 
@@ -461,8 +453,8 @@ Everything exported from `src/main.ts` is public API and semver-protected:
   separate task, not a drive-by change
 - **API Extractor engine advisory:** The build logs an advisory that
   `@microsoft/api-extractor` bundles TypeScript 5.9.3 while this project pins
-  6.0.3. This is harmless today and resolves upstream when the TypeScript 7
-  migration lands (see the typescript-eslint#10940 note above)
+  the latest 6.x.x. This is harmless today and resolves upstream when the
+  TypeScript 7 migration lands
 
 ## Future Topics
 

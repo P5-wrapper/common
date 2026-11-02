@@ -9,16 +9,16 @@ export function library(root: string): UserConfig {
     plugins: [
       dts({
         bundleTypes: true,
-        tsconfigPath: resolve(root, "tsconfig.json")
-      })
+        tsconfigPath: resolve(root, "tsconfig.json"),
+      }),
     ],
     build: {
       emptyOutDir: true,
       lib: {
         entry: resolve(root, "src", "main.ts"),
         name: "P5WrapperCommon",
-        fileName: format => (format === "es" ? "main.mjs" : "main.cjs"),
-        formats: ["es", "cjs"]
+        fileName: (format) => (format === "es" ? "main.mjs" : "main.cjs"),
+        formats: ["es", "cjs"],
       },
       rollupOptions: {
         external: ["p5", "microdiff"],
@@ -27,10 +27,10 @@ export function library(root: string): UserConfig {
           dir: dist,
           globals: {
             p5: "p5",
-            microdiff: "microdiff"
-          }
-        }
-      }
+            microdiff: "microdiff",
+          },
+        },
+      },
     },
     test: {
       globals: true,
@@ -38,16 +38,16 @@ export function library(root: string): UserConfig {
       environment: "happy-dom",
       coverage: {
         include: [posix.join("src", "**/*.{ts,js}")],
-        reporter: ["text-summary", "html", "clover"]
+        reporter: ["text-summary", "html", "clover"],
       },
       setupFiles: resolve(root, "tests", "setup.ts"),
       deps: {
         optimizer: {
           web: {
-            include: ["vitest-canvas-mock"]
-          }
-        }
-      }
-    }
+            include: ["vitest-canvas-mock"],
+          },
+        },
+      },
+    },
   };
 }

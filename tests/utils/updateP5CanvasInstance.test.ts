@@ -1,10 +1,10 @@
-import { SketchProps } from "@/main";
 import { type CanvasContainerRef } from "@contracts/CanvasContainerRef";
-import { p5 } from "@contracts/p5";
 import { type P5CanvasInstanceRef } from "@contracts/P5CanvasInstanceRef";
+import { p5 } from "@contracts/p5";
 import { createP5CanvasInstance } from "@utils/createP5CanvasInstance";
 import { updateP5CanvasInstance } from "@utils/updateP5CanvasInstance";
 import { describe, expect, it, vi } from "vitest";
+import { SketchProps } from "@/main";
 
 describe("updateP5CanvasInstance", () => {
   it("Removes the previous instance and creates a new one", () => {
@@ -12,7 +12,7 @@ describe("updateP5CanvasInstance", () => {
     const canvasContainer = document.createElement("div");
     const canvasContainerRef: CanvasContainerRef = { current: canvasContainer };
     const p5CanvasInstanceRef: P5CanvasInstanceRef<SketchProps> = {
-      current: null
+      current: null,
     };
     const instance = createP5CanvasInstance(sketch, canvasContainer);
 
@@ -21,7 +21,7 @@ describe("updateP5CanvasInstance", () => {
     const updatedInstance = updateP5CanvasInstance(
       p5CanvasInstanceRef,
       canvasContainerRef,
-      sketch
+      sketch,
     );
 
     expect(instance).toBeInstanceOf(p5);
@@ -34,7 +34,7 @@ describe("updateP5CanvasInstance", () => {
     const canvasContainer = document.createElement("div");
     const canvasContainerRef: CanvasContainerRef = { current: null };
     const p5CanvasInstanceRef: P5CanvasInstanceRef<SketchProps> = {
-      current: null
+      current: null,
     };
     const instance = createP5CanvasInstance(sketch, canvasContainer);
 
@@ -43,7 +43,7 @@ describe("updateP5CanvasInstance", () => {
     const updatedInstance = updateP5CanvasInstance(
       p5CanvasInstanceRef,
       canvasContainerRef,
-      sketch
+      sketch,
     );
 
     expect(updatedInstance).toBeNull();

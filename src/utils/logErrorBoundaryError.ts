@@ -5,7 +5,7 @@ function tidyErrorLogText(text: string): string {
   return text
     .trim()
     .split("\n")
-    .map(line => line.trim())
+    .map((line) => line.trim())
     .join("\n");
 }
 
@@ -38,7 +38,7 @@ function createErrorMessage(error: unknown): string {
     return `BigInt(${error})`;
   }
 
-  if (error instanceof Array) {
+  if (Array.isArray(error)) {
     return `Array(${JSON.stringify([...error])})`;
   }
 

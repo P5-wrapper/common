@@ -1,6 +1,6 @@
 import { type CanvasContainer } from "@contracts/CanvasContainer";
-import { p5 } from "@contracts/p5";
 import { type P5CanvasInstance } from "@contracts/P5CanvasInstance";
+import { p5 } from "@contracts/p5";
 import { type Sketch } from "@contracts/Sketch";
 import { type SketchProps } from "@contracts/SketchProps";
 

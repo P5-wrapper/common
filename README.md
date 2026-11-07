@@ -35,15 +35,13 @@ Vite config in the same commit.
 
 ## Development
 
-| Command              | Action                                          |
-| :------------------- | :---------------------------------------------- |
-| `pnpm install`       | Install dependencies (updates the lock file).   |
-| `pnpm format`        | Format all files with Prettier.                 |
-| `pnpm format:check`  | Check formatting without writing.               |
-| `pnpm lint`          | Run ESLint (type-aware).                        |
-| `pnpm lint:fix`      | Run ESLint with autofix.                        |
-| `pnpm test`          | Run the Vitest suite.                           |
-| `pnpm test:coverage` | Run tests with coverage (what CI runs).         |
-| `pnpm test:watch`    | Watch mode.                                     |
-| `pnpm build`         | Clean, type check, and build the npm library.   |
-| `pnpm integrate`     | format:check → lint → test → build (CI mirror). |
+| Command              | Action                                        |
+| :------------------- | :-------------------------------------------- |
+| `pnpm install`       | Install dependencies (updates the lock file). |
+| `pnpm format`        | Format all files with Biome.                  |
+| `pnpm lint`          | Check formatting and lint with Biome.         |
+| `pnpm test`          | Run the Vitest suite.                         |
+| `pnpm test:coverage` | Run tests with coverage (what CI runs).       |
+| `pnpm test:watch`    | Watch mode.                                   |
+| `pnpm build`         | Clean, type check, and build the npm library. |
+| `pnpm integrate`     | lint → test → build (CI mirror).              |

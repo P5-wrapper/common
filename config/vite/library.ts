@@ -17,7 +17,7 @@ export function library(root: string): UserConfig {
       lib: {
         entry: resolve(root, "src", "main.ts"),
         name: "P5WrapperCommon",
-        fileName: format => (format === "es" ? "main.mjs" : "main.cjs"),
+        fileName: (format) => (format === "es" ? "main.mjs" : "main.cjs"),
         formats: ["es", "cjs"]
       },
       rollupOptions: {

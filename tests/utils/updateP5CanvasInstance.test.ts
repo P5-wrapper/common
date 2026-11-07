@@ -1,10 +1,10 @@
-import { SketchProps } from "@/main";
 import { type CanvasContainerRef } from "@contracts/CanvasContainerRef";
-import { p5 } from "@contracts/p5";
 import { type P5CanvasInstanceRef } from "@contracts/P5CanvasInstanceRef";
+import { p5 } from "@contracts/p5";
 import { createP5CanvasInstance } from "@utils/createP5CanvasInstance";
 import { updateP5CanvasInstance } from "@utils/updateP5CanvasInstance";
 import { describe, expect, it, vi } from "vitest";
+import { SketchProps } from "@/main";
 
 describe("updateP5CanvasInstance", () => {
   it("Removes the previous instance and creates a new one", () => {

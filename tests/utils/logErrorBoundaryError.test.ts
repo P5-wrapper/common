@@ -56,7 +56,7 @@ describe("logErrorBoundaryError", () => {
     const logged = errorLoggerSpy.mock.calls[0][0] as string;
     const introductions = logged
       .split("\n")
-      .filter(line => line.includes("The error boundary was triggered"));
+      .filter((line) => line.includes("The error boundary was triggered"));
 
     expect(introductions).toHaveLength(1);
   });
